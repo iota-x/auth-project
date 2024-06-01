@@ -2,7 +2,6 @@ import {connect} from '@/dbConfig/dbConfig'
 import User from '@/models/userModel'
 import { NextRequest, NextResponse } from 'next/server'
 import bcryptjs from 'bcryptjs'
-import { sendEmail } from '@/helpers/mailer'
 import jwt from 'jsonwebtoken'
 
 connect();
@@ -32,7 +31,7 @@ export async function POST(req: NextRequest) {
             email: user.email
         }
 
-    const token = jwt.sign(tokenData, process.env.TOKEN_SECRE!, {expiresIn: '1d'})
+    const token = jwt.sign(tokenData, process.env.TOKEN_SECRET!, {expiresIn: '1d'})
 
     const response = NextResponse.json({
         message: "Logged in successfully",
